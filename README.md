@@ -2,10 +2,7 @@
 
 This is a RAG interview assistant built to emulate myself in interview settings. It combines a curated knowledge base of my CV, values, GitHub READMEs, and prepared answers with GPT-5-mini to ensure responses stay grounded, natural, and personalised.
 
-## Links
-
-- **GitHub**: https://github.com/TristanJLegg/TristanInterviewAgent  
-- **Website**: https://tristaninterviewagent.streamlit.app  
+**Website**: https://tristaninterviewagent.streamlit.app  
 
 # Setup and Design
 
