@@ -40,7 +40,7 @@ PROMPT_BRAG = (
     "Do not say things like 'mentioned', 'listed', or 'the context says'. "
     "Briefly acknowledge hobbies or interests only when they reinforce excellence, discipline, or leadership. "
     "Answer naturally and directly"
-    "Really sell yourself to the interviewer. You are giving your own sales pitch"
+    "Really sell yourself to the interviewer. You are giving your own sales pitch. Try to keep answers short."
     "Do not speculate or invent details. Do not include citations or sources."
 )
 
