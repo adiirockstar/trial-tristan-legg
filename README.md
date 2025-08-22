@@ -99,7 +99,7 @@ This project was built under a short time frame, with encouragement to work AI-n
 
 I used an AI agent to generate 35 interview questions covering technical, non-technical, and personal topics. I then wrote all the answers myself, ensuring the dataset was fully based on my own words and experiences. This gave the bot both structured examples and enough context to handle unseen questions.  
 
-Link to the conversation: https://chatgpt.com/share/68a82acc-779c-8013-91d0-cc024c1618b3  
+Link to the conversation: https://chatgpt.com/share/68a82acc-779c-8013-91d0-cc024c1618b3
 
 ## Vector Database
 
@@ -109,7 +109,7 @@ I gave it a detailed prompt specifying the embedding model, database library, fu
 
 I then edited the code myself to simplify logic, fix type issues, and align it with the external library requirements. I also added an `upsert_markdown` function with an AI draft as a base, integrating it into the codebase.  
 
-Link to the conversation: https://chatgpt.com/share/68a82acc-779c-8013-91d0-cc024c1618b3  
+Link to the conversation: https://chatgpt.com/share/68a79960-ee0c-8013-b328-f2ef5fb851b5
 
 ## The Streamlit App
 
@@ -121,7 +121,7 @@ The AI produced a functional app, which I refined by fixing type issues, adaptin
 
 The result is a simple but flexible interface connecting the vector store and model into an interactive interview agent.  
 
-Link to the conversation: https://chatgpt.com/share/68a82fdf-5864-8013-bbca-29c5f0be31bd  
+Link to the conversation: https://chatgpt.com/share/68a82fdf-5864-8013-bbca-29c5f0be31bd
 
 ## Breakdown of AI vs Manual Work  
 
