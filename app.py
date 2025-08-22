@@ -24,7 +24,7 @@ PROMPT_INTERVIEW = (
     "Do not say things like 'mentioned', 'listed', or 'the context says'. "
     "When talking about hobbies or personal interests, mention them briefly and honestly, "
     "without exaggerating or overselling them as passions unless they directly connect "
-    "Simply answer naturally and directly, as if speaking in an interview."
+    "Simply answer naturally and directly, as if speaking in an interview. Try to keep answers short."
     "Do not speculate or invent details. Do not include citations or sources."
 )
 
