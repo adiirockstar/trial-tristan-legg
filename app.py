@@ -1,7 +1,7 @@
 # app.py — Streamlit RAG chat (FAISS in-memory, uses existing vectorstore.py)
 
 import streamlit as st
-from typing import List, Tuple, Union
+from typing import List, Literal, Tuple, Union, cast
 from openai import OpenAI
 from vectorstore import ingest, search, upsert_markdown
 
@@ -73,6 +73,38 @@ PROMPT_CONCISE = (
     "Do not speculate or invent details. Do not include citations or sources."
 )
 
+PROMPTS = {
+    "PROMPT_INTERVIEW": PROMPT_INTERVIEW,
+    "PROMPT_BRAG": PROMPT_BRAG,
+    "PROMPT_STORY": PROMPT_STORY,
+    "PROMPT_CONCISE": PROMPT_CONCISE,
+}
+
+# gpt-5 verbosity is categorical: "low" | "medium" | "high"
+DEFAULT_VERBOSITY = {
+    "PROMPT_INTERVIEW": "medium",
+    "PROMPT_BRAG": "medium",
+    "PROMPT_STORY": "high",
+    "PROMPT_CONCISE": "low",
+}
+# =====================================
+
+PROMPTS = {
+    "PROMPT_INTERVIEW": PROMPT_INTERVIEW,
+    "PROMPT_BRAG": PROMPT_BRAG,
+    "PROMPT_STORY": PROMPT_STORY,
+    "PROMPT_CONCISE": PROMPT_CONCISE,
+}
+
+Verbosity = Literal["low", "medium", "high"]
+
+DEFAULT_VERBOSITY: dict[str, Verbosity] = {
+    "PROMPT_INTERVIEW": "medium",
+    "PROMPT_BRAG": "high",
+    "PROMPT_STORY": "high",
+    "PROMPT_CONCISE": "low",
+}
+
 if "index" not in st.session_state:
     st.session_state.index = ingest(
         data_dir="./data",
@@ -86,36 +118,35 @@ if "messages" not in st.session_state:
 if "uploader_seed" not in st.session_state:
     st.session_state.uploader_seed = 0
 
-# active prompt selection
-PROMPTS = {
-    "PROMPT_INTERVIEW": PROMPT_INTERVIEW,
-    "PROMPT_BRAG": PROMPT_BRAG,
-    "PROMPT_STORY": PROMPT_STORY,
-    "PROMPT_CONCISE": PROMPT_CONCISE,
-}
 if "active_prompt_key" not in st.session_state:
     st.session_state.active_prompt_key = "PROMPT_INTERVIEW"
+
+if "verbosity" not in st.session_state:
+    st.session_state.verbosity = DEFAULT_VERBOSITY[st.session_state.active_prompt_key]
 
 st.title("Tristan Interview Agent")
 
 with st.sidebar:
     st.subheader("Controls")
-    temperature = st.slider("Creativity (temperature)", 0.0, 1.0, 0.15, 0.05)
 
     st.caption("Prompt preset")
     row1 = st.columns(2)
     if row1[0].button("Interview", use_container_width=True):
         st.session_state.active_prompt_key = "PROMPT_INTERVIEW"
+        st.session_state.verbosity = DEFAULT_VERBOSITY["PROMPT_INTERVIEW"]
     if row1[1].button("Brag", use_container_width=True):
         st.session_state.active_prompt_key = "PROMPT_BRAG"
+        st.session_state.verbosity = DEFAULT_VERBOSITY["PROMPT_BRAG"]
 
     row2 = st.columns(2)
-    if row2[0].button("Storyteller", use_container_width=True):
+    if row2[0].button("Story", use_container_width=True):
         st.session_state.active_prompt_key = "PROMPT_STORY"
+        st.session_state.verbosity = DEFAULT_VERBOSITY["PROMPT_STORY"]
     if row2[1].button("Concise", use_container_width=True):
         st.session_state.active_prompt_key = "PROMPT_CONCISE"
+        st.session_state.verbosity = DEFAULT_VERBOSITY["PROMPT_CONCISE"]
 
-    st.write(f"Active: **{st.session_state.active_prompt_key}**")
+    st.write(f"Active: **{st.session_state.active_prompt_key}** • Verbosity: **{st.session_state.verbosity}**")
 
     md_file = st.file_uploader(
         "Upload Markdown (.md)",
@@ -180,11 +211,11 @@ def build_context(q: str):
             docs.append(page)
     return "\n\n".join(docs)
 
-def chat_completion(messages):
+def chat_completion(messages, verbosity: Literal["low","medium","high"]):
     resp = client.chat.completions.create(
         model=MODEL_NAME,
         messages=messages,
-        temperature=temperature,
+        verbosity=verbosity,  # Literal["low","medium","high"]
     )
     return resp.choices[0].message.content
 
@@ -207,6 +238,9 @@ if user_input:
         if client is None:
             st.error("OpenAI client not initialised.")
         else:
-            reply = chat_completion(llm_messages)
+            reply = chat_completion(
+                llm_messages,
+                verbosity=cast(Verbosity, st.session_state.verbosity)
+            )
             st.markdown(reply)
             st.session_state.messages.append({"role": "assistant", "content": reply})
