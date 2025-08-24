@@ -87,9 +87,11 @@ After delivery, we hold a retrospective to capture what went wrong and update pr
 
 # Future Improvements
 
-The main improvement I want to make is increasing response accuracy. The bot occasionally invents details or projects, especially when asked about topics far outside its dataset. This is most noticeable in storytelling mode, which tends to produce long, romanticised answers. Ideally, in such cases, the bot should refuse and suggest contacting me directly instead.  
+The main technical improvements I would make are aimed at reducing hallucinations and improving accuracy. 
 
-I would also like to include more data about me and my personal experiences, so the agent’s responses sound even closer to how I would answer.  
+I plan to add confidence checks so that if the retrieval step produces weak evidence, the agent can politely defer instead of inventing details. I already use smart chunking by splitting content on Markdown headings, but I could go further by improving how results are ranked. Right now I use Max Marginal Relevance to increase diversity, and with more time I would expand this into a two-stage re-ranking setup that combines MMR with a cross-encoder so the most relevant chunks are always surfaced first.
+
+The second area of improvement is making the answers sound even more like me. While the agent already reflects my tone fairly well, it can still slip into generic or formal phrasing. To address this, I would fine-tune the model with LoRA on more of my own writing, which would let it pick up my style without the cost of full retraining. I would also add a lightweight style checker that scores responses against my usual voice and nudges them closer if they drift.
 
 # Show My Thinking
 
