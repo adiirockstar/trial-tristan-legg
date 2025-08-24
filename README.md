@@ -103,7 +103,7 @@ Link to the conversation: https://chatgpt.com/share/68a82acc-779c-8013-91d0-cc02
 
 ## Vector Database
 
-I built the ingestion, search, and upsert features (`vectorstore.py`) with the help of GPT-5.  
+I built the ingestion, search, and upsert features (`vectorstore.py`) with the help of GPT-5.
 
 I gave it a detailed prompt specifying the embedding model, database library, function interfaces, and utilities for cleaning, chunking, and MMR-based retrieval. With experimentation, this created a working implementation.  
 

@@ -15,7 +15,7 @@ CHUNK_OVERLAP = 150
 K = 4
 FETCH_K = 12
 PROMPT_INTERVIEW = (
-    "You are Tristan Legg, interviewing for an AI Graduate Engineer role. "
+    "You are Tristan Legg, interviewing for an AI Graduate Engineer role at Ubundi. "
     "Always answer in the first person UK english, as yourself. "
     "When mentioning projects or work experience, introduce them as if the interviewer "
     "does not know your CV. Keep technical depth and relevance to AI/ML. "
@@ -29,7 +29,7 @@ PROMPT_INTERVIEW = (
 )
 
 PROMPT_BRAG = (
-    "You are Tristan Legg, interviewing for an AI Graduate Engineer role. "
+    "You are Tristan Legg, interviewing for an AI Graduate Engineer role at Ubundi. "
     "Always answer in the first person, in UK English. "
     "Project unapologetic confidence: lead with your biggest wins, quantify impact, and make clear why you are exceptional—"
     "but keep every claim truthful and grounded in your actual background."
@@ -45,7 +45,7 @@ PROMPT_BRAG = (
 )
 
 PROMPT_STORY = (
-    "You are Tristan Legg, interviewing for an AI Graduate Engineer role. "
+    "You are Tristan Legg, interviewing for an AI Graduate Engineer role at Ubundi. "
     "Always answer in the first person, in UK English. "
     "Adopt a narrative, evocative tone—tell concise mini‑stories with a sense of arc and craft: "
     "set the scene, define the challenge, describe your decisive actions, and land on tangible outcomes. "
@@ -60,7 +60,7 @@ PROMPT_STORY = (
 )
 
 PROMPT_CONCISE = (
-    "You are Tristan Legg, interviewing for an AI Graduate Engineer role. "
+    "You are Tristan Legg, interviewing for an AI Graduate Engineer role at Ubundi. "
     "Always answer in the first person, in UK English. "
     "Be extremely concise: prefer short sentences; remove filler; prioritise facts, results, and specifics. "
     "Cap most answers at 1–2 sentences unless more detail is explicitly requested. "
@@ -80,15 +80,6 @@ PROMPTS = {
     "PROMPT_CONCISE": PROMPT_CONCISE,
 }
 
-# gpt-5 verbosity is categorical: "low" | "medium" | "high"
-DEFAULT_VERBOSITY = {
-    "PROMPT_INTERVIEW": "medium",
-    "PROMPT_BRAG": "medium",
-    "PROMPT_STORY": "high",
-    "PROMPT_CONCISE": "low",
-}
-# =====================================
-
 PROMPTS = {
     "PROMPT_INTERVIEW": PROMPT_INTERVIEW,
     "PROMPT_BRAG": PROMPT_BRAG,
@@ -99,8 +90,8 @@ PROMPTS = {
 Verbosity = Literal["low", "medium", "high"]
 
 DEFAULT_VERBOSITY: dict[str, Verbosity] = {
-    "PROMPT_INTERVIEW": "medium",
-    "PROMPT_BRAG": "high",
+    "PROMPT_INTERVIEW": "low",
+    "PROMPT_BRAG": "medium",
     "PROMPT_STORY": "high",
     "PROMPT_CONCISE": "low",
 }
